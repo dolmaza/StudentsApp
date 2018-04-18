@@ -1,0 +1,94 @@
+﻿@model StudentUpdateViewModel
+@{
+    ViewBag.Title = "სტუდენტის რედაქტირება";
+}
+
+@section HeaderSection {
+    <link href="~/Content/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/loader/loader.css" rel="stylesheet" />
+    <link href="~/Content/plugins/toastr/toastr.min.css" rel="stylesheet" />
+}
+
+@section Breadcramps {
+    <ol class="breadcrumb">
+        <li><i class="fa fa-users"></i> <a href="@Model.StudentsUrl">სტუდენტები</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+}
+
+
+<div class="box">
+    <div class="box-header with-border">
+        <button id="save-updated-student" class="btn btn-flat btn-success"><i class="fa fa-floppy-o"></i> შენახვა</button>
+
+        <div class="box-tools pull-right">
+
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group code-1">
+                            <label for="first-name">სახელი</label>
+                            <input type="text" class="form-control" value="@Model.Firstname" id="first-name">
+                            <span class="error-text help-block"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group code-2">
+                            <label for="last-name">გვარი</label>
+                            <input type="text" class="form-control" value="@Model.Lastname" id="last-name">
+                            <span class="error-text help-block"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group code-5">
+                    <label for="gender">სქესი</label>
+                    <select class="form-control" id="gender">
+                        <option value=""></option>
+                        @foreach (var item in Model.Genders)
+                        {
+                            <option @(item.IsSelected ? Html.Raw("selected='selected'") : null) value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                    <span class="error-text help-block"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group code-4 code-8">
+                    <label for="birth-date">დაბადების თარიღი</label>
+                    <input type="text" class="form-control apply-date-picker" value="@Model.BirthdateString" id="birth-date">
+                    <span class="error-text help-block"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group code-3 code-6 code-7">
+                    <label for="personal-number">პირადი ნომერი</label>
+                    <input type="text" class="form-control apply-numeric-input" value="@Model.PersonalNumber" id="personal-number" maxlength="11">
+                    <span class="error-text help-block"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section FooterSection {
+    <script>
+        var saveUrl = "@Model.SaveUrl";
+        var studentsUrl = "@Model.StudentsUrl";
+    </script>
+    <script src="~/Content/plugins/loader/loader.js"></script>
+    <script src="~/Content/plugins/jQuery/jquery.numeric-input.js"></script>
+    <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Content/plugins/toastr/toastrNotification.js"></script>
+    <script src="~/Content/plugins/validation/validation.js"></script>
+    <script src="~/Content/scripts/Students/StudentsUpdate.js"></script>
+}
